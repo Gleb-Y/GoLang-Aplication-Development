@@ -1,9 +1,6 @@
 package repository
 
-import (
-	"practice-8/internal/repository/_postgres"
-	"practice-8/pkg/modules"
-)
+import "practice-8/pkg/modules"
 
 type UserRepository interface {
 	CreateUser(username, email, hashedPassword, role string) (*modules.User, error)
@@ -13,14 +10,4 @@ type UserRepository interface {
 	UpdateUser(id int, username, email string) error
 	DeleteUser(id int) error
 	ListUsers() ([]*modules.User, error)
-}
-
-type Repositories struct {
-	UserRepository UserRepository
-}
-
-func NewRepositories(db *_postgres.Dialect) *Repositories {
-	return &Repositories{
-		UserRepository: _postgres.NewUserRepository(db),
-	}
 }
